@@ -17,18 +17,39 @@
   />
 
   <body>
-    <div class="container">
-      <div class="imageBox">
+    <div>
+      <div class="imageBox" id="imgBox1">
         <a
           id="spinnerCustom"
           class="Magic360"
-          data-options="filename: img-{col}.png; autospin: off;"
+          data-options="filename: img-{col}.png; autospin: off; hint:false;"
         >
           <img src="/images/1/img-01.png" id="displayedImage" />
         </a>
       </div>
+      <div class="imageBox" id="imgBox2">
+        <a
+          id="spinnerCustom"
+          class="Magic360"
+          data-options="filename: img-{col}.png; autospin: off;
+          hint:false;"
+        >
+          <img src="/images/2/img-01.png" id="displayedImage" />
+        </a>
+      </div>
+      <div class="imageBox" id="imgBox3">
+        <a
+          id="spinnerCustom"
+          class="Magic360"
+          data-options="filename: img-{col}.png; autospin: off;
+          hint:false;"
+        >
+          <img src="/images/3/img-01.png" id="displayedImage" />
+        </a>
+      </div>
+
       <div id="infos">
-        <h3>Arm Chair Sofa with recliner</h3>
+        <h3 class="text-center">Arm Chair Sofa with recliner</h3>
 
         <div class="d-flex justify-content-evenly mt-5" id="colorButtons"></div>
       </div>
@@ -44,7 +65,7 @@
     let currentImageFolder = 1;
     function generateColorButtons() {
       const colorButtonsContainer = document.getElementById("colorButtons");
-      const imageFolders = ["1", "2", "3"]; // Corresponding image folders for each color
+      const imageFolders = ["1", "2", "3"];
 
       imageFolders.forEach((folder, index) => {
         const button = document.createElement("button");
@@ -56,20 +77,18 @@
         button.style.borderRadius = "50%";
         button.addEventListener("click", () => {
           currentImageFolder = folder;
-          console.log(folder);
-          updateImage(folder);
+          document.querySelectorAll(".imageBox").forEach((div) => {
+            if (div.id === `imgBox${currentImageFolder}`) {
+              div.style.display = "block";
+            } else {
+              div.style.display = "none";
+            }
+          });
         });
         colorButtonsContainer.appendChild(button);
       });
     }
 
-    function updateImage(folder) {
-      document.getElementById("displayedImage").setAttribute("src", `images/${folder}/img-01.png`);
-    }
-
-    // Ensure the DOM content is loaded before executing
-    document.addEventListener("DOMContentLoaded", function () {
-      generateColorButtons();
-    });
+    generateColorButtons();
   </script>
 </html>

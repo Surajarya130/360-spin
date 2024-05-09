@@ -17,7 +17,9 @@
   />
 
   <body>
-    <div>
+    <div class="parentDiv">
+      <img src="./addImg/svg360.svg" alt="360" class="rotIcon" />
+
       <div class="imageBox" id="imgBox1">
         <a
           id="spinnerCustom"
@@ -47,12 +49,12 @@
           <img src="/images/3/img-01.png" id="displayedImage" />
         </a>
       </div>
+    </div>
 
-      <div id="infos">
-        <h3 class="text-center">Arm Chair Sofa with recliner</h3>
+    <div id="infos" class="parentDiv">
+      <h3 class="text-center">Arm Chair Sofa with recliner</h3>
 
-        <div class="d-flex justify-content-evenly mt-5" id="colorButtons"></div>
-      </div>
+      <div class="d-flex justify-content-evenly mt-5" id="colorButtons"></div>
     </div>
   </body>
   <script src="./main.js"></script>
@@ -67,14 +69,23 @@
       const colorButtonsContainer = document.getElementById("colorButtons");
       const imageFolders = ["1", "2", "3"];
 
+      const colorNames = ["Color1", "Color2", "Color3"];
+
       imageFolders.forEach((folder, index) => {
         const button = document.createElement("button");
         button.style.border = "none";
+
+        const colorName = document.createElement("span");
+        colorName.textContent = colorNames[index];
+        colorName.classList.add("colorName");
+        button.classList.add("colorButton"); // Add class for styling
+
         button.style.backgroundImage = `url(/images/color-${index + 1}.jpg)`;
         button.style.backgroundSize = "cover";
         button.style.width = "50px";
         button.style.height = "50px";
         button.style.borderRadius = "50%";
+
         button.addEventListener("click", () => {
           currentImageFolder = folder;
           document.querySelectorAll(".imageBox").forEach((div) => {
@@ -85,6 +96,7 @@
             }
           });
         });
+        button.appendChild(colorName); // Append color name span to button
         colorButtonsContainer.appendChild(button);
       });
     }
